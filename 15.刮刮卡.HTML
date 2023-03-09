@@ -32,6 +32,7 @@
         }
 
         .onceMore {
+            user-select: none;
             display: block;
             margin-top: 20px;
             width: 200px;
@@ -42,12 +43,24 @@
             border-radius: 5px;
             font-size: 20px;
         }
+
+        .begin {
+            display: inline-block;
+            position: absolute;
+            width: 500px;
+            height: 200px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <span class="reward">谢谢惠顾</span>
+        <img src="./imgs/begin.png" class="begin">
+        <span class=" reward">谢谢惠顾</span>
         <canvas id="canvas" width="600" height="400"></canvas>
     </div>
     <button class="onceMore" onclick="onceMore()">再来一次</button>
@@ -84,18 +97,21 @@
                 ctx.closePath()
             }
         }
+        document.querySelector('.begin').onmousedown = (e) => {
+            e.target.style.display = 'none'
+        }
         function rendomfunc() {
             let rendom = randomInt(100)
-            if (rendom > 90) {
-                span.innerHTML = '法拉利'
-                span.style.color = 'red'
-            } else if (rendom > 80) {
+            if (rendom > 95) {
                 span.innerHTML = '劳斯莱斯'
+                span.style.color = 'red'
+            } else if (rendom > 85) {
+                span.innerHTML = '法拉利'
                 span.style.color = 'blue'
-            } else if (rendom > 70) {
+            } else if (rendom > 75) {
                 span.innerHTML = '保时捷'
                 span.style.color = 'yellow'
-            } else if (rendom > 60) {
+            } else if (rendom > 55) {
                 span.innerHTML = '奔驰'
                 span.style.color = 'green'
             } else {
