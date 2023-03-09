@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        const canvas = document.querySelector('canvas')
+        let index = 0
+        let ctx = canvas.getContext('2d')
+        function render() {
+            if (index < 360) {
+                index += 2
+            } else {
+                index = 0;
+            }
+            ctx.clearRect(0, 0, 600, 600)
+            ctx.translate(300, 300)
+            ctx.rotate((Math.PI / 180) * index)
+            ctx.fillStyle = 'orange'
+            ctx.fillRect(-300, -25, 600, 50)
+            // 基点返回
+            ctx.rotate(-(Math.PI / 180) * index)
+            ctx.translate(-300, -300)
+            requestAnimationFrame(render)
+        }
+        requestAnimationFrame(render)
+    </script>
+</body>
+
+</html>
