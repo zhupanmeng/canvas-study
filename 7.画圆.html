@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500px" height="500px" id="canvas"></canvas>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        const context = document.getElementById('canvas').getContext('2d');
+        // context.arc(x, y, radius, Math.PI / 180 * startAngle, Math.PI / 180 * endAngle, anticlockwise);
+        //  圆心坐标  半径  开始角度  结束角度  方向（顺时针/逆时针）
+        //true 逆时针            false 顺时针
+        // 也可以用来画圆弧
+        context.arc(200, 200, 100, 0, Math.PI * 2, false)
+        context.fillStyle = 'red';
+        context.fill();
+        context.strokeStyle = 'green';
+        context.stroke();
+
+
+
+    </script>
+</body>
+
+</html>

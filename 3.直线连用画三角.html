@@ -1,0 +1,47 @@
+'
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500px" height="500px" id="canvas"></canvas>
+    <script>
+
+        //获取元素
+        const canvas = document.getElementById('canvas')
+        //获取节点对象
+        const context = canvas.getContext('2d') // canvas只能画2d，没有3d
+        // 开启一条路径
+        context.beginPath();
+        // 确定开始点
+        context.moveTo(100, 100);
+        // 确定结束点
+        //lineTo可以连用
+        context.lineTo(400, 100);
+        context.lineTo(400, 400);
+        context.lineTo(100, 100);
+        //在着色之前设置颜色和线宽
+        context.strokeStyle = 'green';
+        context.lineWidth = 3;
+
+        // 上色
+        context.stroke();
+        // 关闭路径
+        context.closePath();
+    </script>
+</body>
+
+</html>'

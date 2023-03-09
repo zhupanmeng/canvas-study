@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="800px" height="500px" id="canvas"></canvas>
+    <script src="./工具.js"></script>
+    <script>
+        let canvas = document.getElementById('canvas')
+        canvas.addEventListener('mousemove', throttling(drawyuan, 50))
+        function drawyuan(e) {
+            let x = e.offsetX;
+            let y = e.offsetY;
+            drawCricle(x, y, 10, 0, 2, false, randomColor(), 2)
+        }
+    </script>
+</body>
+
+</html>

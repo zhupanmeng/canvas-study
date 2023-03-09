@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500px" height="500px" id="canvas"></canvas>
+    <script>
+        drawLine('canvas', { s1: 100, s2: 100 }, { e1: 400, e2: 100 }, 'red')
+        drawLine('canvas', { s1: 400, s2: 100 }, { e1: 400, e2: 400 }, 'blue')
+        drawLine('canvas', { s1: 400, s2: 400 }, { e1: 100, e2: 400 }, 'green')
+        drawLine('canvas', { s1: 100, s2: 400 }, { e1: 100, e2: 100 }, 'yellow')
+
+        function drawLine(id, start, end, color) {
+            const { s1, s2 } = start
+            const { e1, e2 } = end
+            //获取元素
+            const canvas = document.getElementById(id)
+            //获取节点对象
+            const context = canvas.getContext('2d') // canvas只能画2d，没有3d
+            // 开启一条路径
+            context.beginPath();
+            // 确定开始点
+            context.moveTo(s1, s2);
+            // 确定结束点
+            context.lineTo(e1, e2);
+            //在着色之前设置颜色和线宽
+            context.strokeStyle = color;
+            context.lineWidth = 3;
+
+            // 上色
+            context.stroke();
+            // 关闭路径
+            context.closePath();
+        }
+    </script>
+</body>
+
+</html>

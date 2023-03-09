@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #eee;
+            width: 300px;
+            height: 300px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500px" height="500px" id="canvas"></canvas>
+    <script src="./工具.js"></script>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+        ctx.moveTo(100, 100)
+        ctx.lineTo(200, 100)
+        ctx.arc(100, 100, 100, 0, Math.PI / 6)
+        ctx.lineTo(100, 100)
+        ctx.fillStyle = 'red'
+        ctx.fill()
+    </script>
+</body>
+
+</html>

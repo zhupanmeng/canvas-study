@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500px" height="500px" id="canvas"></canvas>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        const context = document.getElementById('canvas').getContext('2d');
+        // rect(x,y,width,height) 分别为矩形左上角的位置，和矩形的宽高
+        //先填充再描边
+        context.rect(100, 100, 300, 200);
+        context.fillStyle = 'red';
+        context.fill();
+        context.strokeStyle = 'green';
+        context.lineWidth = 3;
+        context.stroke();
+
+
+        // 该矩形为可以填充颜色和添加边框颜色的矩形
+        //矩形有三种
+        // fillRect(); 实心矩形
+        context.fillStyle = 'blue';
+        context.fillRect(100, 350, 100, 100);
+
+        // strokeRect(); 空心矩形
+        context.strokeStyle = 'yellow';
+        context.lineWidth = 5;
+        context.strokeRect(300, 350, 100, 100);
+
+
+    </script>
+</body>
+
+</html>
