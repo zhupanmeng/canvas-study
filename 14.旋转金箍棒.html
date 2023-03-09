@@ -24,16 +24,18 @@
         let ctx = canvas.getContext('2d')
         function render() {
             if (index < 360) {
-                index += 2
+                index += 5
             } else {
                 index = 0;
             }
             ctx.clearRect(0, 0, 600, 600)
             ctx.translate(300, 300)
             ctx.rotate((Math.PI / 180) * index)
+            ctx.scale(1, 0.5)
             ctx.fillStyle = 'orange'
             ctx.fillRect(-300, -25, 600, 50)
-            // 基点返回
+            // 基点返回 逆序变化
+            ctx.scale(1, 2)
             ctx.rotate(-(Math.PI / 180) * index)
             ctx.translate(-300, -300)
             requestAnimationFrame(render)

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            margin: 0 auto;
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reward {
+            user-select: none;
+            font-size: 100px;
+        }
+
+        #canvas {
+            display: block;
+            position: absolute;
+            z-index: 999;
+            top: 0;
+            left: 0;
+        }
+
+        .onceMore {
+            display: block;
+            margin-top: 20px;
+            width: 200px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: orange;
+            border: 1px solid yellow;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span class="reward">谢谢惠顾</span>
+        <canvas id="canvas" width="600" height="400"></canvas>
+    </div>
+    <button class="onceMore" onclick="onceMore()">再来一次</button>
+    <script src="./工具.js"></script>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        const canvas = document.querySelector('canvas')
+        const container = document.querySelector('div')
+        const span = document.querySelector('.reward')
+        let ctx = canvas.getContext('2d')
+        let img = new Image()
+        img.src = './imgs/m2.png'
+        let containerTop = container.offsetTop
+        let containerleft = container.offsetLeft
+        img.onload = () => {
+            ctx.drawImage(img, 0, 0, 600, 400)
+        }
+        let candraw = false
+        canvas.onmousedown = () => {
+            candraw = true
+        }
+        canvas.onmouseup = () => {
+            candraw = false
+        }
+        rendomfunc()
+        canvas.onmousemove = (e) => {
+            if (candraw) {
+                let x = e.pageX - containerleft
+                let y = e.pageY - containerTop
+                ctx.beginPath()
+                ctx.globalCompositeOperation = 'destination-out'
+                ctx.arc(x, y, 30, 0, Math.PI * 2)
+                ctx.fill()
+                ctx.closePath()
+            }
+        }
+        function rendomfunc() {
+            let rendom = randomInt(100)
+            if (rendom > 90) {
+                span.innerHTML = '法拉利'
+                span.style.color = 'red'
+            } else if (rendom > 80) {
+                span.innerHTML = '劳斯莱斯'
+                span.style.color = 'blue'
+            } else if (rendom > 70) {
+                span.innerHTML = '保时捷'
+                span.style.color = 'yellow'
+            } else if (rendom > 60) {
+                span.innerHTML = '奔驰'
+                span.style.color = 'green'
+            } else {
+                span.innerHTML = '谢谢惠顾'
+                span.style.color = 'black'
+            }
+        }
+        function onceMore() {
+            ctx.globalCompositeOperation = "source-over"
+            ctx.drawImage(img, 0, 0, 600, 400)
+            rendomfunc()
+        }
+    </script>
+</body>
+
+</html>
