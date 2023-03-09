@@ -75,8 +75,6 @@
         let beginstatus = false
         let img = new Image()
         img.src = './imgs/m2.png'
-        let containerTop = container.offsetTop
-        let containerleft = container.offsetLeft
         img.onload = () => {
             ctx.drawImage(img, 0, 0, 600, 400)
         }
@@ -94,8 +92,8 @@
                     begin.style.display = 'none'
                     beginstatus = true
                 }
-                let x = e.pageX - containerleft
-                let y = e.pageY - containerTop
+                let x = e.offsetX;
+                let y = e.offsetY;
                 ctx.beginPath()
                 ctx.globalCompositeOperation = 'destination-out'
                 ctx.arc(x, y, 30, 0, Math.PI * 2)
