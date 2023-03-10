@@ -60,7 +60,7 @@
 
 <body>
     <div class="container">
-        <img src="./imgs/begin.png" class="begin">
+        <img src="./src/imgs/begin.png" class="begin">
         <span class=" reward">谢谢惠顾</span>
         <canvas id="canvas" width="600" height="400"></canvas>
     </div>
@@ -74,7 +74,7 @@
         let ctx = canvas.getContext('2d')
         let beginstatus = false
         let img = new Image()
-        img.src = './imgs/m2.png'
+        img.src = './src/imgs/m2.png'
         img.onload = () => {
             ctx.drawImage(img, 0, 0, 600, 400)
         }
