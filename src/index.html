@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .toolbar {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #87ec69;
+            width: 60%;
+            height: 60px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        #canvas {
+            display: block;
+            background-color: #f4efef;
+        }
+
+        .inputnumber {
+            width: 40px;
+        }
+
+        .active {
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toolbar">
+        <button class="BtnSize active" onclick="thinBtn()">细线条</button>
+        <button class="BtnSize" onclick="midBtn()">中线条</button>
+        <button class="BtnSize" onclick="boldBtn()">粗线条</button>
+        <div>
+            <label for="num">自定义粗细</label>
+            <input type="number" class="inputnumber" value="1" name="num">
+        </div>
+        <button class="rubberButton" onclick="rubberButton()">橡皮擦</button>
+        <div>
+            <label for="color">选择颜色</label>
+            <input type="color" class="inputcolor" name="color">
+        </div>
+        <button class="clearbtn" onclick="clearbtn()">清除画板</button>
+        <button class="savabtn" onclick="savabtn()">下载图片</button>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        const canvas = document.querySelector('#canvas')
+        const butsize = document.querySelectorAll('.BtnSize')
+        const inputnumber = document.querySelector('.inputnumber')
+        const inputcolor = document.querySelector('.inputcolor')
+        const rubber = document.querySelector('.rubberButton')
+        function canvasSize() {
+            canvas.width = document.body.clientWidth
+            canvas.height = document.body.clientHeight
+        }
+        canvasSize()
+        let ctx = canvas.getContext('2d')
+        let candraw = false
+        ctx.lineJoin = 'round'
+        ctx.lineCap = 'round'
+        canvas.onmousedown = (event) => {
+            candraw = true
+            ctx.beginPath()
+            let x = event.offsetX
+            let y = event.offsetY
+            ctx.moveTo(x, y)
+        }
+        canvas.onmousemove = (event) => {
+            if (candraw) {
+                let x = event.offsetX
+                let y = event.offsetY
+                ctx.lineTo(x, y)
+                ctx.stroke()
+            }
+        }
+        canvas.onmouseup = () => {
+            candraw = false
+            ctx.closePath()
+        }
+        [...butsize].forEach((ele, index, btns) => {
+            ele.onclick = () => {
+                changerubber.call(rubber, true)
+                ele.classList.add('active')
+                ctx.lineWidth = inputnumber.value = index ? index * 5 : 1
+                btns.forEach((item, i) => {
+                    if (index !== i) {
+                        item.classList.remove('active')
+                    }
+                })
+            }
+        });
+        inputnumber.onchange = (e) => {
+            ctx.lineWidth = e.target.value
+        }
+        inputcolor.onchange = (e) => {
+            ctx.strokeStyle = e.target.value
+        }
+        clearbtn = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+        }
+        rubberButton = () => {
+            let ele = event.target
+            changerubber.call(ele)
+        }
+        changerubber = function (close) {
+            if (this.classList.contains('active') || close) {
+                this.classList.remove('active')
+                ctx.lineWidth = inputnumber.value = '1'
+                ctx.globalCompositeOperation = 'source-over'
+            } else {
+                ctx.lineWidth = inputnumber.value = '20'
+                ctx.globalCompositeOperation = 'destination-out'
+                this.classList.add('active')
+            }
+        }
+        savabtn = () => {
+            let ImageUrl = canvas.toDataURL()
+            let a = document.createElement('a')
+            a.href = ImageUrl
+            let msg = prompt('请输入保存的图片名  (默认为.png格式)')
+            if (msg) {
+                a.download = msg
+                a.click()
+            }
+        }
+    </script>
+</body>
+
+</html>
