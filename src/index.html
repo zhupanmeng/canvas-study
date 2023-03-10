@@ -74,15 +74,16 @@
         }
         canvasSize()
         let ctx = canvas.getContext('2d')
-
-        let icon = new Image()
-        icon.src = './imgs/huaban.png'
-        icon.onload = () => {
-            ctx.drawImage(icon, 40, 10, 60, 50)
-            ctx.font = '22px  Arial'
-            ctx.fillText('Canvas在线画板', 100, 50)
+        function rendericon() {
+            let icon = new Image()
+            icon.src = './imgs/huaban.png'
+            icon.onload = () => {
+                ctx.drawImage(icon, 40, 10, 60, 50)
+                ctx.font = '22px  Arial'
+                ctx.fillText('Canvas在线画板', 100, 50)
+            }
         }
-
+        rendericon()
         let candraw = false
         ctx.lineJoin = 'round'
         ctx.lineCap = 'round'
@@ -125,6 +126,7 @@
         }
         clearbtn = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
+            rendericon()
         }
         rubberButton = () => {
             let ele = event.target
