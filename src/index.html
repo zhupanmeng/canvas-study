@@ -25,6 +25,7 @@
             justify-content: space-around;
             align-items: center;
             border-radius: 5px;
+            user-select: none;
         }
 
         #canvas {
@@ -125,7 +126,7 @@
             ctx.strokeStyle = e.target.value
         }
         clearbtn = () => {
-            changerubber.call(rubber)
+            changerubber.call(rubber, true)
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             rendericon()
         }
