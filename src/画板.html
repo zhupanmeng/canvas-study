@@ -29,7 +29,8 @@
 
         #canvas {
             display: block;
-            background-color: #f4efef;
+            background-color: #f6f6f6;
+            cursor: pointer;
         }
 
         .inputnumber {
@@ -73,6 +74,15 @@
         }
         canvasSize()
         let ctx = canvas.getContext('2d')
+
+        let icon = new Image()
+        icon.src = '../imgs/huaban.png'
+        icon.onload = () => {
+            ctx.drawImage(icon, 40, 10, 60, 50)
+            ctx.font = '22px  Arial'
+            ctx.fillText('Canvas在线画板', 100, 50)
+        }
+
         let candraw = false
         ctx.lineJoin = 'round'
         ctx.lineCap = 'round'
