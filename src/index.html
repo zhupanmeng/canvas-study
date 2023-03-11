@@ -107,6 +107,10 @@
             candraw = false
             ctx.closePath()
         }
+        canvas.onmouseleave = () => {
+            candraw = false
+            ctx.closePath()
+        }
         [...butsize].forEach((ele, index, btns) => {
             ele.onclick = () => {
                 changerubber.call(rubber, true)
