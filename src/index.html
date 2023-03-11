@@ -150,7 +150,7 @@
             ctx.strokeStyle = e.target.value
         }
         clearbtn = () => {
-            changerubber.call(rubber, true)
+            changerubber.call(rubber, true, true)
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             Watermark && rendericon()
         }
@@ -158,10 +158,10 @@
             let ele = event.target
             changerubber.call(ele)
         }
-        changerubber = function (close) {
+        changerubber = function (close, noChangeLine) {
             if (this.classList.contains('active') || close) {
                 this.classList.remove('active')
-                ctx.lineWidth = inputnumber.value = '1'
+                !noChangeLine && (ctx.lineWidth = inputnumber.value = '1')
                 ctx.globalCompositeOperation = 'source-over'
             } else {
                 ctx.lineWidth = inputnumber.value = '20'
