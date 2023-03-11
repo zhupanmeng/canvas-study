@@ -41,10 +41,24 @@
         .active {
             background-color: orange;
         }
+
+        .hidetoolbar {
+            position: absolute;
+            left: 81%;
+            top: 20px;
+        }
+
+        .turnOffWatermark {
+            position: absolute;
+            left: 88%;
+            top: 20px;
+        }
     </style>
 </head>
 
 <body>
+    <button class="hidetoolbar" onclick="hidetoolbar()">隐藏工具栏</button>
+    <button class="turnOffWatermark" onclick="turnOffWatermark()">关闭水印</button>
     <div class="toolbar">
         <button class="BtnSize active" onclick="thinBtn()">细线条</button>
         <button class="BtnSize" onclick="midBtn()">中线条</button>
@@ -69,20 +83,26 @@
         const inputnumber = document.querySelector('.inputnumber')
         const inputcolor = document.querySelector('.inputcolor')
         const rubber = document.querySelector('.rubberButton')
+        const toolbar = document.querySelector('.toolbar')
+        var Watermark = true
         function canvasSize() {
             canvas.width = document.body.clientWidth
             canvas.height = document.body.clientHeight
         }
         canvasSize()
         let ctx = canvas.getContext('2d')
-        function rendericon() {
-            let icon = new Image()
-            icon.src = './imgs/huaban.png'
-            icon.onload = () => {
-                ctx.drawImage(icon, 40, 10, 60, 50)
-                ctx.font = '22px  Arial'
-                ctx.fillText('Canvas在线画板', 100, 50)
+        function rendericon(clear) {
+            if (!clear) {
+                let icon = new Image()
+                icon.src = './imgs/huaban.png'
+                icon.onload = () => {
+                    ctx.drawImage(icon, 40, 10, 60, 50)
+                    ctx.font = '22px  Arial'
+                    ctx.fillText('Canvas在线画板', 100, 50)
+                }
+                return;
             }
+            ctx.clearRect(40, 10, 230, 100)
         }
         rendericon()
         let candraw = false
@@ -132,7 +152,7 @@
         clearbtn = () => {
             changerubber.call(rubber, true)
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            rendericon()
+            Watermark && rendericon()
         }
         rubberButton = () => {
             let ele = event.target
@@ -157,6 +177,34 @@
             if (msg) {
                 a.download = msg
                 a.click()
+            }
+        }
+        hidetoolbar = () => {
+            let btn = event.target
+            if (btn.classList.contains('active')) {
+                toolbar.style.transition = '.5s'
+                toolbar.style.transform = 'translate(-50%,0%)'
+                btn.classList.remove('active')
+                btn.innerHTML = '隐藏工具栏'
+            } else {
+                toolbar.style.transition = '.5s'
+                toolbar.style.transform = 'translate(-50%,-102%)'
+                btn.classList.add('active')
+                btn.innerHTML = '显示工具栏'
+            }
+
+        }
+
+        turnOffWatermark = () => {
+            let btn = event.target
+            if (Watermark) { //关闭
+                Watermark = false
+                btn.innerHTML = '打开水印'
+                rendericon(true)
+            } else { // 打开
+                Watermark = true
+                btn.innerHTML = '关闭水印'
+                rendericon()
             }
         }
     </script>
